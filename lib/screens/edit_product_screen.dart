@@ -137,7 +137,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         title: Text('Edit Product'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.save),
+            icon: Icon(Icons.save,color: Colors.black,),
             onPressed: _saveForm,
           ),
         ],
@@ -154,7 +154,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   children: <Widget>[
                     TextFormField(
                       initialValue: _initValues['title'],
-                      decoration: InputDecoration(labelText: 'Title'),
+                      decoration: InputDecoration(labelText: 'Title',
+                       focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.18), width: 2.0)),
+          errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),),
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -177,7 +188,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     ),
                     TextFormField(
                       initialValue: _initValues['price'],
-                      decoration: InputDecoration(labelText: 'Price'),
+                      decoration: InputDecoration(labelText: 'Price',
+                       focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.18), width: 2.0)),
+          errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       focusNode: _priceFocusNode,
@@ -209,7 +231,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     ),
                     TextFormField(
                       initialValue: _initValues['description'],
-                      decoration: InputDecoration(labelText: 'Description'),
+                      decoration: InputDecoration(labelText: 'Description',
+                       focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.18), width: 2.0)),
+          errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
+                      ),
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,
                       focusNode: _descriptionFocusNode,
@@ -260,7 +294,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            decoration: InputDecoration(labelText: 'Image URL'),
+                            decoration: InputDecoration(labelText: 'Image URL',
+                       focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.18), width: 2.0)),
+          errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),),
                             keyboardType: TextInputType.url,
                             textInputAction: TextInputAction.done,
                             controller: _imageUrlController,
