@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_shop_app/widgets/emtycartscreen.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/cart.dart' show Cart;
@@ -33,7 +34,7 @@ class CartScreen extends StatelessWidget {
                   Spacer(),
                   Chip(
                     label: Text(
-                      '\$${cart.totalAmount.toStringAsFixed(2)}',
+                      '\Rs ${cart.totalAmount.toStringAsFixed(2)}',
                       style: TextStyle(
                         color: Theme.of(context).primaryTextTheme.title.color,
                       ),
@@ -47,7 +48,7 @@ class CartScreen extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Expanded(
-            child: ListView.builder(
+            child:cart.items.isEmpty?EmtyCartScreen() :ListView.builder(
               itemCount: cart.items.length,
               itemBuilder: (ctx, i) => CartItem(
                     cart.items.values.toList()[i].id,

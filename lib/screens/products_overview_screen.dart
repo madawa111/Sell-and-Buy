@@ -61,6 +61,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   _showOnlyFavorites = true;
                 } else {
                   _showOnlyFavorites = false;
+                  
                 }
               });
             },

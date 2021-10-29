@@ -16,9 +16,27 @@ class UserProductItem extends StatelessWidget {
     final scaffold = Scaffold.of(context);
     return ListTile(
       title: Text(title),
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(imageUrl),
-      ),
+      leading:Container(
+          width: 50,
+          height:  50,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.purple,
+             // Color(0xFFFF0000), 
+              width: 2.0),
+              borderRadius: BorderRadius.circular(65.0)),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: CircleAvatar(
+                radius:  20,
+                backgroundImage:NetworkImage(imageUrl) ),
+          ),
+        ),
+
+
+      //  CircleAvatar(
+      //   backgroundImage: NetworkImage(imageUrl),
+      // ),
       trailing: Container(
         width: 100,
         child: Row(

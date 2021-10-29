@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_shop_app/widgets/emtycartscreen.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/orders.dart' show Orders;
@@ -31,7 +32,7 @@ class OrdersScreen extends StatelessWidget {
               );
             } else {
               return Consumer<Orders>(
-                builder: (ctx, orderData, child) => ListView.builder(
+                builder: (ctx, orderData, child) =>orderData.orders.isEmpty?_emptyOrders(): ListView.builder(
                       itemCount: orderData.orders.length,
                       itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
                     ),
@@ -40,6 +41,35 @@ class OrdersScreen extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+  Widget _emptyOrders(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: 45,
+        ),
+        Text('No Orders Found',
+            style: 
+              
+                  TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            
+            ),
+        SizedBox(height: 12),
+        Text(
+          'Please add Order',
+          style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey),
+        
+        ),
+        SizedBox(height: 60),
+        Image.asset('./images/notification.png'),
+        SizedBox(height:25),
+      ],
     );
   }
 }

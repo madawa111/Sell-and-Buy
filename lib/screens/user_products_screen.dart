@@ -22,11 +22,22 @@ class UserProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Your Products'),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              Navigator.of(context).pushNamed(EditProductScreen.routeName);
-            },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                  GestureDetector(
+                child: Text("Add New Item"
+                ,
+                  style: TextStyle(fontSize:16),),
+                onTap: () {
+                  Navigator.of(context).pushNamed(EditProductScreen.routeName);
+                },
+              ),
+              ],
+                       
+            ),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_shop_app/widgets/size_dropdown.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/product.dart';
@@ -14,6 +15,7 @@ class EditProductScreen extends StatefulWidget {
 class _EditProductScreenState extends State<EditProductScreen> {
   final _priceFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
+  final _sizeFocusNode = FocusNode();
   final _imageUrlController = TextEditingController();
   final _imageUrlFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
@@ -21,15 +23,20 @@ class _EditProductScreenState extends State<EditProductScreen> {
     id: null,
     title: '',
     price: 0,
+    size:'',
     description: '',
     imageUrl: '',
   );
+ 
   var _initValues = {
     'title': '',
     'description': '',
     'price': '',
+    'size':'',
     'imageUrl': '',
   };
+  
+  
   var _isInit = true;
   var _isLoading = false;
 
@@ -49,7 +56,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
         _initValues = {
           'title': _editedProduct.title,
           'description': _editedProduct.description,
+          'size':_editedProduct.size,
           'price': _editedProduct.price.toString(),
+
           // 'imageUrl': _editedProduct.imageUrl,
           'imageUrl': '',
         };
@@ -136,9 +145,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
       appBar: AppBar(
         title: Text('Edit Product'),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.save,color: Colors.black,),
-            onPressed: _saveForm,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(children: [
+                         GestureDetector(
+                child: Text('Save',
+                style: TextStyle(fontSize:16),
+                ),
+                onTap: _saveForm,
+              ),
+            ]
+            ),
           ),
         ],
       ),
@@ -155,6 +172,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     TextFormField(
                       initialValue: _initValues['title'],
                       decoration: InputDecoration(labelText: 'Title',
+                       labelStyle: 
+                TextStyle(
+                    fontSize:  15,
+                    color: Color(0xff363636).withOpacity(0.5),
+                    fontWeight: FontWeight.w500),
                        focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
@@ -180,6 +202,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         _editedProduct = Product(
                             title: value,
                             price: _editedProduct.price,
+                            size: _editedProduct.size,
                             description: _editedProduct.description,
                             imageUrl: _editedProduct.imageUrl,
                             id: _editedProduct.id,
@@ -189,6 +212,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     TextFormField(
                       initialValue: _initValues['price'],
                       decoration: InputDecoration(labelText: 'Price',
+                       labelStyle: 
+                TextStyle(
+                    fontSize:  15,
+                    color: Color(0xff363636).withOpacity(0.5),
+                    fontWeight: FontWeight.w500),
                        focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
@@ -223,15 +251,68 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         _editedProduct = Product(
                             title: _editedProduct.title,
                             price: double.parse(value),
+                            size: _editedProduct.size,
                             description: _editedProduct.description,
                             imageUrl: _editedProduct.imageUrl,
                             id: _editedProduct.id,
                             isFavorite: _editedProduct.isFavorite);
                       },
                     ),
+                     TextFormField(
+                      initialValue: _initValues['size'],
+                      decoration: InputDecoration(labelText: 'Size (S,M,L,XL,XXL)',
+                       focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.18), width: 2.0)),
+          errorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red, width: 2.0)),
+          focusedErrorBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
+                      ),
+                   
+                      keyboardType: TextInputType.multiline,
+                      focusNode: _sizeFocusNode,
+                        onFieldSubmitted: (_) {
+                        FocusScope.of(context)
+                            .requestFocus(_descriptionFocusNode);
+                      },
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter a size';
+                        }
+                        // if (value.length < 1) {
+                        //   return 'Should be at least 10 characters long.';
+                        // }
+                        return null;
+                      },
+                      onSaved: (value)
+          {
+                        _editedProduct = Product(
+                          title: _editedProduct.title,
+                          price: _editedProduct.price,
+                          size: value,
+                          description:_editedProduct.description,
+                          imageUrl: _editedProduct.imageUrl,
+                          id: _editedProduct.id,
+                          isFavorite: _editedProduct.isFavorite,
+                        );
+                      },
+                    ),
+         
+         
                     TextFormField(
                       initialValue: _initValues['description'],
                       decoration: InputDecoration(labelText: 'Description',
+                      
+                       labelStyle: 
+                TextStyle(
+                    fontSize:  15,
+                    color: Color(0xff363636).withOpacity(0.5),
+                    fontWeight: FontWeight.w500),
                        focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
@@ -260,6 +341,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         _editedProduct = Product(
                           title: _editedProduct.title,
                           price: _editedProduct.price,
+                          size: _editedProduct.size,
                           description: value,
                           imageUrl: _editedProduct.imageUrl,
                           id: _editedProduct.id,
@@ -295,6 +377,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         Expanded(
                           child: TextFormField(
                             decoration: InputDecoration(labelText: 'Image URL',
+                             labelStyle: 
+                TextStyle(
+                    fontSize:  15,
+                    color: Color(0xff363636).withOpacity(0.5),
+                    fontWeight: FontWeight.w500),
                        focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: Color(0xFF707070).withOpacity(0.5), width: 2.0)),
@@ -332,6 +419,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               _editedProduct = Product(
                                 title: _editedProduct.title,
                                 price: _editedProduct.price,
+                                size: _editedProduct.size,
                                 description: _editedProduct.description,
                                 imageUrl: value,
                                 id: _editedProduct.id,

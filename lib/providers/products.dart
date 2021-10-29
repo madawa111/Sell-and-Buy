@@ -91,6 +91,7 @@ class Products with ChangeNotifier {
         loadedProducts.add(Product(
           id: prodId,
           title: prodData['title'],
+          size: prodData['size'],
           description: prodData['description'],
           price: prodData['price'],
           isFavorite:
@@ -114,6 +115,7 @@ class Products with ChangeNotifier {
         body: json.encode({
           'title': product.title,
           'description': product.description,
+          'size':product.size,
           'imageUrl': product.imageUrl,
           'price': product.price,
           'creatorId': userId,
@@ -122,6 +124,7 @@ class Products with ChangeNotifier {
       final newProduct = Product(
         title: product.title,
         description: product.description,
+        size: product.size,
         price: product.price,
         imageUrl: product.imageUrl,
         id: json.decode(response.body)['name'],
@@ -143,6 +146,7 @@ class Products with ChangeNotifier {
       await http.patch(url,
           body: json.encode({
             'title': newProduct.title,
+            'size':newProduct.size,
             'description': newProduct.description,
             'imageUrl': newProduct.imageUrl,
             'price': newProduct.price
